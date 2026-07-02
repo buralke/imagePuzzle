@@ -348,6 +348,26 @@
             background-repeat: no-repeat;
         }
 
+        .piece-number {
+            position: absolute;
+            top: 3px;
+            left: 5px;
+            font-size: 11px;
+            font-weight: 700;
+            font-family: var(--font-display);
+            color: #fff;
+            background: rgba(0, 0, 0, 0.55);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            pointer-events: none;
+            line-height: 1;
+        }
+
         .puzzle-piece:active {
             cursor: grabbing;
             transform: scale(1.06);
@@ -1018,6 +1038,12 @@ Bu oyun sana verdiğim küçük bir sözdü Fatma; zamanı geldi, bitti ve yerin
                 piece.style.backgroundSize = '300% 300%';
                 piece.style.backgroundPosition = `${col * 50}% ${row * 50}%`;
 
+                // Add piece number label
+                const numberLabel = document.createElement('span');
+                numberLabel.className = 'piece-number';
+                numberLabel.textContent = pieceIndex + 1;
+                piece.appendChild(numberLabel);
+
                 // Check if piece is in correct position
                 if (pieceIndex === position) {
                     piece.classList.add('correct');
@@ -1148,6 +1174,15 @@ Bu oyun sana verdiğim küçük bir sözdü Fatma; zamanı geldi, bitti ve yerin
             pieceB.style.backgroundImage = tempBg;
             pieceB.style.backgroundPosition = tempBgPos;
             pieceB.dataset.originalIndex = tempOriginal;
+
+            // Swap number labels
+            const numA = pieceA.querySelector('.piece-number');
+            const numB = pieceB.querySelector('.piece-number');
+            if (numA && numB) {
+                const tempNum = numA.textContent;
+                numA.textContent = numB.textContent;
+                numB.textContent = tempNum;
+            }
 
             // Haptic feedback
             if (navigator.vibrate) navigator.vibrate(20);
