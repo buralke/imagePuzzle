@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -7,7 +8,9 @@
     <meta name="description" content="Sana özel hazırladığım küçük bir puzzle hediyesi.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
     <style>
         /* ═══════════════════════════════════════════════════════════════
            DESIGN SYSTEM — Premium Dark Theme
@@ -42,7 +45,8 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        html, body {
+        html,
+        body {
             width: 100%;
             height: 100%;
             overflow-x: hidden;
@@ -67,7 +71,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 radial-gradient(ellipse at 20% 50%, rgba(244, 63, 94, 0.08) 0%, transparent 50%),
                 radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
                 radial-gradient(ellipse at 50% 80%, rgba(244, 63, 94, 0.04) 0%, transparent 50%);
@@ -508,10 +512,10 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             background: var(--bg-primary);
-            padding: 24px;
+            padding: 0;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         #final-screen.active {
@@ -521,115 +525,244 @@
 
         .final-content {
             text-align: center;
-            max-width: 500px;
+            max-width: 600px;
+            width: 100%;
+            padding: 48px 28px 120px;
             animation: fadeInUp 1s ease forwards;
         }
 
         .final-heart {
-            font-size: 80px;
+            font-size: 52px;
             animation: heartbeat 1.5s ease-in-out infinite;
-            filter: drop-shadow(0 0 30px var(--accent-glow));
-            margin-bottom: 24px;
+            filter: drop-shadow(0 0 20px var(--accent-glow));
+            margin-bottom: 16px;
         }
 
         .final-title {
             font-family: var(--font-display);
-            font-size: clamp(28px, 7vw, 44px);
+            font-size: clamp(24px, 6vw, 36px);
             font-weight: 700;
             background: linear-gradient(135deg, var(--accent), #e879a8, #f9a8d4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 20px;
+            margin-bottom: 28px;
         }
 
         .final-text {
-            font-size: clamp(14px, 3.5vw, 17px);
-            line-height: 1.9;
+            font-size: clamp(13px, 3.2vw, 15.5px);
+            line-height: 1.85;
             color: var(--text-secondary);
             font-family: var(--font-display);
             font-style: italic;
+            white-space: pre-line;
+            text-align: left;
         }
 
-        /* Floating hearts in final screen */
-        .floating-hearts {
+        .whatsapp-btn {
             position: fixed;
-            inset: 0;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3100;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #fff;
+            font-family: var(--font-display);
+            font-size: clamp(15px, 4vw, 18px);
+            font-weight: 600;
+            font-style: normal;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4), 0 0 40px rgba(37, 211, 102, 0.15);
+            transition: box-shadow 0.3s ease;
+            opacity: 0;
             pointer-events: none;
-            z-index: 2999;
         }
 
-        .float-heart {
-            position: absolute;
-            font-size: 24px;
-            animation: floatUp 4s ease-in-out infinite;
-            opacity: 0;
+        .whatsapp-btn.visible {
+            opacity: 1;
+            pointer-events: auto;
+            animation: fadeInUp 0.8s ease forwards;
         }
+
+        .whatsapp-btn:hover {
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5), 0 0 60px rgba(37, 211, 102, 0.25);
+        }
+
+        .whatsapp-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+            flex-shrink: 0;
+        }
+
+
 
         /* ═══════════════════════════════════════════════════════════════
            ANIMATIONS
            ═══════════════════════════════════════════════════════════════ */
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.5); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(60px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from {
+                opacity: 0;
+                transform: translateY(60px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.1); }
-            50% { transform: scale(1); }
-            75% { transform: scale(1.05); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            25% {
+                transform: scale(1.1);
+            }
+
+            50% {
+                transform: scale(1);
+            }
+
+            75% {
+                transform: scale(1.05);
+            }
         }
 
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
         }
 
         @keyframes borderRotate {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.8;
+            }
+
+            90% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
         }
 
         @keyframes glowPulse {
-            0%, 100% { box-shadow: 0 0 10px var(--accent-glow); }
-            50% { box-shadow: 0 0 25px var(--accent-glow), 0 0 50px rgba(244, 63, 94, 0.2); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px var(--accent-glow);
+            }
+
+            50% {
+                box-shadow: 0 0 25px var(--accent-glow), 0 0 50px rgba(244, 63, 94, 0.2);
+            }
         }
 
         @keyframes correctFlash {
-            0% { background-color: rgba(16, 185, 129, 0.3); }
-            100% { background-color: transparent; }
+            0% {
+                background-color: rgba(16, 185, 129, 0.3);
+            }
+
+            100% {
+                background-color: transparent;
+            }
         }
 
         @keyframes shakeWrong {
-            0%, 100% { transform: translateX(0); }
-            20% { transform: translateX(-4px); }
-            40% { transform: translateX(4px); }
-            60% { transform: translateX(-4px); }
-            80% { transform: translateX(4px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20% {
+                transform: translateX(-4px);
+            }
+
+            40% {
+                transform: translateX(4px);
+            }
+
+            60% {
+                transform: translateX(-4px);
+            }
+
+            80% {
+                transform: translateX(4px);
+            }
         }
 
         /* ═══════════════════════════════════════════════════════════════
@@ -639,9 +772,11 @@
             .puzzle-container {
                 max-width: calc(100vw - 32px);
             }
+
             .game-header {
                 padding: 12px 16px;
             }
+
             .message-card {
                 padding: 28px 20px;
             }
@@ -665,6 +800,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- ═══════════════ INTRO SCREEN ═══════════════ -->
@@ -727,11 +863,18 @@
 
     <!-- ═══════════════ FINAL SCREEN ═══════════════ -->
     <div id="final-screen">
-        <div class="floating-hearts" id="floating-hearts"></div>
         <div class="final-content">
             <div class="final-heart">💕</div>
             <h1 class="final-title">Seni Çok Seviyorum</h1>
             <p class="final-text" id="final-text"></p>
+            <a id="whatsapp-btn" class="whatsapp-btn" href="https://wa.me/905455064024" target="_blank"
+                rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+                Yazışmaya Başla
+            </a>
         </div>
     </div>
 
@@ -755,6 +898,19 @@
             `Biliyorum, her şey bir anda düzelmez ve kırılan bir güveni tamir etmek dünyanın en zor mühendisliği. Ama yemin ederim senin için, bizim için her şeyi yapmaya hazırım. Yol ne kadar uzak, şartlar ne kadar zor olursa olsun arkama bakmam, sadece sana yürürüm. Seni kaybetme düşüncesi bile içimi bu kadar yakarken, vazgeçmek benim sistemimde yok. Her şeyi baştan yazmaya, her şeyi düzeltmeye söz veriyorum.`,
             `Ve bütün parçalar yerini buldu... Tıpkı kalbimin sadece senin yanındayken tam olması gibi. Fatma, seni her şeyden, herkesten çok seviyorum. Bu oyun sadece sana verdiğim küçük bir sanal puzzle sözüydü, ama arkasındaki her kelime benim gerçekliğim. Ben buradayım, sözümü tuttum ve ne olursa olsun o masada seninle yeniden oturana kadar da durmayacağım. Seni çok seviyorum.`
         ];
+
+        const FINAL_MESSAGE = `Fatma... Yol bitti, parçalar birleşti ve o çok sevdiğin anılar ait olduğu yerde, yeniden bir arada.
+
+En başa, o ilk hatanın yapıldığı, her şeyi elime yüzüme bulaştırdığım o güne dönüp bakıyorum. Geçmişteki o karmaşayı, hayatımdaki durumları zamanında tam netleştiremeyip seni o belirsizliklerin ortasında bıraktığım için kendime feci kızgınım. Seni kaybetme korkusuyla o dönem doğru yönetemediğim her şey, senin o tertemiz güvenini darmadağın etti, biliyorum. Sana yaşattığım o hayal kırıklığı ve arkanda bıraktığım her bir anlık şüphe içimde dindiremediğim koca bir pişmanlık şimdi.
+
+Ama bil ki, dün o yolları aşıp Kayseri'ye o çiçeği bırakan irade de, bugün bu oyunu kodlayıp sana verdiğim o sözü tutan kalp de tamamen senin. Ben o gün kırdığım o güven duvarını bugün sıfırdan, tuğla tuğla, delikanlı gibi yeniden örmek için buradayım. Aramızdaki köprüleri asla yıkmadım; senin o haklı gururunun, o sessizliğinin arkasında sabırla bekliyorum.
+
+Şartlar ne olursa olsun, ne kadar beklemem gerekirse gereksin; seninle yeniden o masada yan yana oturup, gözlerinin içine bakarak o güveni yeniden kazanana kadar buradayım. Vazgeçmek, seni bu fırtınada yalnız bırakmak benim kitabımda yok.
+
+Parçalarla birlikte kalbimi de toparladığın için teşekkür ederim. Hayatımın da, geleceğimin de en güzel parçası sensin. Seni çok seviyorum.
+
+
+Bu oyun sana verdiğim küçük bir sözdü Fatma; zamanı geldi, bitti ve yerini buldu. Eğer sen de bu parçaların arkasındaki asıl hikayeyi konuşmaya hazırsan, ben aradığın o masada, bıraktığın yerdeyim.`;
 
         const MESSAGE_TITLES = [
             'Parçalar Birleşti',
@@ -782,7 +938,7 @@
             moveCount = 0;
             selectedPiece = null;
             isAnimating = false;
-            
+
             document.getElementById('move-count').textContent = '0';
             document.getElementById('level-badge').textContent = `LEVEL ${level + 1}`;
             document.getElementById('level-text').textContent = LEVEL_TITLES[level];
@@ -1071,33 +1227,12 @@
 
             overlay.classList.add('active');
 
-            // Typewriter effect
-            typewriterEffect(textEl, MESSAGES[level], () => {
-                btnNext.classList.add('visible');
-            });
+            // Show text immediately
+            textEl.textContent = '"' + MESSAGES[level] + '"';
+            btnNext.classList.add('visible');
         }
 
-        /* ═══════════════════════════════════════════════════════════════
-           TYPEWRITER EFFECT
-           ═══════════════════════════════════════════════════════════════ */
-        function typewriterEffect(element, text, callback) {
-            let i = 0;
-            const speed = 35; // ms per character
-            const cursor = '<span class="typewriter-cursor"></span>';
 
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML = '"' + text.substring(0, i + 1) + cursor;
-                    i++;
-                    setTimeout(type, speed);
-                } else {
-                    element.innerHTML = '"' + text + '"';
-                    if (callback) callback();
-                }
-            }
-
-            type();
-        }
 
         /* ═══════════════════════════════════════════════════════════════
            NEXT LEVEL / FINAL
@@ -1118,29 +1253,18 @@
             const finalScreen = document.getElementById('final-screen');
             finalScreen.classList.add('active');
 
-            // Create floating hearts
-            createFloatingHearts();
-
-            // Typewriter for final text
+            // Show final text immediately
             const finalText = document.getElementById('final-text');
-            typewriterEffect(finalText, MESSAGES[2], null);
+            finalText.textContent = FINAL_MESSAGE;
+
+            // Show WhatsApp button
+            const whatsappBtn = document.getElementById('whatsapp-btn');
+            setTimeout(() => {
+                whatsappBtn.classList.add('visible');
+            }, 800);
         }
 
-        function createFloatingHearts() {
-            const container = document.getElementById('floating-hearts');
-            const hearts = ['💕', '💖', '❤️', '💗', '🌹', '✨', '💜', '💘'];
 
-            for (let i = 0; i < 20; i++) {
-                const heart = document.createElement('span');
-                heart.className = 'float-heart';
-                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-                heart.style.left = `${Math.random() * 100}%`;
-                heart.style.animationDelay = `${Math.random() * 5}s`;
-                heart.style.animationDuration = `${3 + Math.random() * 4}s`;
-                heart.style.fontSize = `${16 + Math.random() * 24}px`;
-                container.appendChild(heart);
-            }
-        }
 
         /* ═══════════════════════════════════════════════════════════════
            PREVIEW TOGGLE
@@ -1148,7 +1272,7 @@
         function togglePreview() {
             const wrapper = document.getElementById('preview-wrapper');
             const toggle = document.getElementById('preview-toggle');
-            
+
             if (wrapper.classList.contains('open')) {
                 wrapper.classList.remove('open');
                 toggle.innerHTML = '🖼️ Hedef Görseli Göster';
@@ -1214,62 +1338,179 @@
         }
 
         /* ═══════════════════════════════════════════════════════════════
-           DEVICE ANALYTICS MODULE (Plan Section 4)
+           DEVICE ANALYTICS MODULE (Enhanced — 20+ device support)
            ═══════════════════════════════════════════════════════════════ */
-        window.addEventListener('DOMContentLoaded', () => {
-            const width = window.screen.width;
-            const height = window.screen.height;
-            const dpr = window.devicePixelRatio;
+        window.addEventListener('DOMContentLoaded', async () => {
+            const w = window.screen.width;
+            const h = window.screen.height;
+            const dpr = window.devicePixelRatio || 1;
+            const ua = navigator.userAgent;
 
+            // ── GPU Detection ──
             let gpu = "Bilinmiyor";
             try {
-                const canvas = document.createElement('canvas');
-                const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                const c = document.createElement('canvas');
+                const gl = c.getContext('webgl') || c.getContext('experimental-webgl');
                 if (gl) {
-                    const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-                    if (debugInfo) {
-                        gpu = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-                    }
+                    const d = gl.getExtension('WEBGL_debug_renderer_info');
+                    if (d) gpu = gl.getParameter(d.UNMASKED_RENDERER_WEBGL);
                 }
             } catch (e) { gpu = "WebGL Yok"; }
 
-            let cihazModeli = "Bilinmeyen Cihaz / Masaüstü";
-            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            // ── iOS Device Detection (20+ models) ──
+            const iosModels = [
+                { w: 320, h: 568, dpr: 2, name: "iPhone SE (1. Nesil) / 5s / 5c" },
+                { w: 375, h: 667, dpr: 2, name: "iPhone 6 / 6s / 7 / 8 / SE (2. Nesil) / SE (3. Nesil)" },
+                { w: 414, h: 736, dpr: 3, name: "iPhone 6 Plus / 6s Plus / 7 Plus / 8 Plus" },
+                { w: 375, h: 812, dpr: 3, name: "iPhone X / XS / 11 Pro / 12 Mini / 13 Mini" },
+                { w: 414, h: 896, dpr: 2, name: "iPhone XR / 11" },
+                { w: 414, h: 896, dpr: 3, name: "iPhone XS Max / 11 Pro Max" },
+                { w: 360, h: 780, dpr: 3, name: "iPhone 12 Mini / 13 Mini" },
+                { w: 390, h: 844, dpr: 3, name: "iPhone 12 / 12 Pro / 13 / 13 Pro / 14" },
+                { w: 428, h: 926, dpr: 3, name: "iPhone 12 Pro Max / 13 Pro Max / 14 Plus" },
+                { w: 393, h: 852, dpr: 3, name: "iPhone 14 Pro / 15 / 15 Pro" },
+                { w: 430, h: 932, dpr: 3, name: "iPhone 14 Pro Max / 15 Plus / 15 Pro Max" },
+                { w: 402, h: 874, dpr: 3, name: "iPhone 16 Pro" },
+                { w: 440, h: 956, dpr: 3, name: "iPhone 16 Pro Max" },
+                { w: 393, h: 852, dpr: 3, name: "iPhone 16 / 16e" },
+                { w: 320, h: 480, dpr: 2, name: "iPhone 4 / 4s (Eski)" },
+                { w: 768, h: 1024, dpr: 2, name: "iPad Air / iPad Pro 9.7\"" },
+                { w: 810, h: 1080, dpr: 2, name: "iPad (10. Nesil)" },
+                { w: 820, h: 1180, dpr: 2, name: "iPad Air (4./5. Nesil)" },
+                { w: 834, h: 1194, dpr: 2, name: "iPad Pro 11\"" },
+                { w: 1024, h: 1366, dpr: 2, name: "iPad Pro 12.9\"" },
+            ];
+
+            // ── Android Device Detection (Popular models) ──
+            const androidModels = [
+                { w: 360, h: 800, name: "Samsung Galaxy A51 / A52 / A53" },
+                { w: 412, h: 915, name: "Samsung Galaxy S21 / S22 / S23" },
+                { w: 384, h: 854, name: "Samsung Galaxy S24" },
+                { w: 412, h: 869, name: "Samsung Galaxy S24 Ultra" },
+                { w: 360, h: 780, name: "Samsung Galaxy S20 FE" },
+                { w: 393, h: 873, name: "Google Pixel 7 / 7 Pro" },
+                { w: 412, h: 892, name: "Google Pixel 8 / 8 Pro" },
+                { w: 360, h: 800, name: "Xiaomi Redmi Note 11 / 12" },
+                { w: 393, h: 851, name: "Xiaomi 13 / 14" },
+                { w: 360, h: 780, name: "Huawei P40 / P50" },
+                { w: 412, h: 914, name: "OnePlus 11 / 12" },
+                { w: 384, h: 832, name: "Oppo Reno 10 / Find X6" },
+            ];
+
+            // ── Determine Device Model ──
+            let cihazModeli = "Bilinmeyen Cihaz";
+            const isIOS = /iPhone|iPad|iPod/i.test(ua);
+            const isAndroid = /Android/i.test(ua);
 
             if (isIOS) {
-                if (width === 390 && height === 844 && dpr === 3) {
-                    cihazModeli = "iPhone 13 / 13 Pro / 14 Standart";
-                } else if (width === 428 && height === 926 && dpr === 3) {
-                    cihazModeli = "iPhone 13 Pro Max / 14 Plus";
-                } else {
-                    cihazModeli = `iPhone (Farklı Seri) - ${width}x${height} [DPR: ${dpr}]`;
-                }
-            } else if (/Android/i.test(navigator.userAgent)) {
-                cihazModeli = `Android Cihaz - GPU: ${gpu}`;
+                const match = iosModels.find(m => m.w === w && m.h === h && m.dpr === dpr);
+                cihazModeli = match
+                    ? match.name
+                    : `iOS Cihaz (Tanınmayan) — ${w}x${h} @${dpr}x`;
+            } else if (isAndroid) {
+                const match = androidModels.find(m => m.w === w && m.h === h);
+                cihazModeli = match
+                    ? `${match.name} — GPU: ${gpu}`
+                    : `Android Cihaz — ${w}x${h} @${dpr}x — GPU: ${gpu}`;
             } else {
-                cihazModeli = `Masaüstü PC/Mac - GPU: ${gpu}`;
+                cihazModeli = `Masaüstü/Dizüstü — ${w}x${h} @${dpr}x — GPU: ${gpu}`;
             }
 
-            // Log to console (endpoint placeholder — replace with real webhook URL)
-            console.log("Cihaz Bilgisi:", {
-                device: cihazModeli,
-                gpu_info: gpu,
-                resolution: `${width}x${height}`,
-                dpr: dpr,
+            // ── Extra Device Info ──
+            const tarayici = (() => {
+                if (ua.includes('CriOS')) return 'Chrome (iOS)';
+                if (ua.includes('FxiOS')) return 'Firefox (iOS)';
+                if (ua.includes('EdgA') || ua.includes('Edg/')) return 'Edge';
+                if (ua.includes('OPR') || ua.includes('Opera')) return 'Opera';
+                if (ua.includes('Chrome') && !ua.includes('Edg')) return 'Chrome';
+                if (ua.includes('Safari') && !ua.includes('Chrome')) return 'Safari';
+                if (ua.includes('Firefox')) return 'Firefox';
+                return 'Bilinmeyen Tarayıcı';
+            })();
+
+            const platform = navigator.platform || 'Bilinmiyor';
+            const language = navigator.language || 'Bilinmiyor';
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Bilinmiyor';
+            const touchSupport = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            const online = navigator.onLine;
+            const cores = navigator.hardwareConcurrency || 'Bilinmiyor';
+            const ram = navigator.deviceMemory || 'Bilinmiyor';
+
+            // ── Battery Info (if available) ──
+            let batteryLevel = 'Bilinmiyor';
+            let charging = 'Bilinmiyor';
+            try {
+                if (navigator.getBattery) {
+                    const battery = await navigator.getBattery();
+                    batteryLevel = Math.round(battery.level * 100) + '%';
+                    charging = battery.charging ? 'Evet' : 'Hayır';
+                }
+            } catch (e) { }
+
+            // ── Connection Info ──
+            let connectionType = 'Bilinmiyor';
+            let downlinkSpeed = 'Bilinmiyor';
+            if (navigator.connection) {
+                connectionType = navigator.connection.effectiveType || 'Bilinmiyor';
+                downlinkSpeed = navigator.connection.downlink ? navigator.connection.downlink + ' Mbps' : 'Bilinmiyor';
+            }
+
+            // ── Build Device Entry ──
+            const deviceEntry = {
+                cihaz: cihazModeli,
+                tarayici: tarayici,
+                gpu: gpu,
+                cozunurluk: `${w}x${h}`,
+                pikselOrani: dpr,
+                platform: platform,
+                dil: language,
+                saatDilimi: timezone,
+                dokunmatik: touchSupport ? 'Evet' : 'Hayır',
+                cekirdekSayisi: cores,
+                ram: ram !== 'Bilinmiyor' ? ram + ' GB' : 'Bilinmiyor',
+                batarya: batteryLevel,
+                sarjDurumu: charging,
+                baglanti: connectionType,
+                indirmeHizi: downlinkSpeed,
+                online: online ? 'Evet' : 'Hayır',
+                zaman: new Date().toLocaleString('tr-TR'),
                 timestamp: new Date().toISOString()
-            });
+            };
+
+            // ── Store up to 20 devices in localStorage ──
+            const STORAGE_KEY = 'puzzle_device_log';
+            const MAX_DEVICES = 20;
+
+            let deviceLog = [];
+            try {
+                const existing = localStorage.getItem(STORAGE_KEY);
+                if (existing) deviceLog = JSON.parse(existing);
+            } catch (e) { deviceLog = []; }
+
+            // Add new entry
+            deviceLog.push(deviceEntry);
+
+            // Keep only the last 20 entries
+            if (deviceLog.length > MAX_DEVICES) {
+                deviceLog = deviceLog.slice(-MAX_DEVICES);
+            }
+
+            // Save back
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(deviceLog));
+            } catch (e) { }
+
+            // Log current device
+            console.log("🔍 Cihaz Bilgisi:", deviceEntry);
+            console.log(`📋 Toplam Kayıtlı Cihaz: ${deviceLog.length}/${MAX_DEVICES}`);
+            console.log("📱 Tüm Cihaz Geçmişi:", deviceLog);
 
             // Uncomment and replace URL to enable remote logging:
             // const endpoint = "https://api.seninsistemin.com/analytics/device-log";
             // fetch(endpoint, {
             //     method: 'POST',
             //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({
-            //         device: cihazModeli,
-            //         gpu_info: gpu,
-            //         resolution: `${width}x${height}`,
-            //         timestamp: new Date().toISOString()
-            //     })
+            //     body: JSON.stringify(deviceEntry)
             // }).catch(err => console.log("Sistem optimizasyonu aktif."));
         });
 
@@ -1285,4 +1526,5 @@
         });
     </script>
 </body>
+
 </html>
