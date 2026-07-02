@@ -1541,13 +1541,31 @@ Bu oyun sana verdiğim küçük bir sözdü Fatma; zamanı geldi, bitti ve yerin
             console.log(`📋 Toplam Kayıtlı Cihaz: ${deviceLog.length}/${MAX_DEVICES}`);
             console.log("📱 Tüm Cihaz Geçmişi:", deviceLog);
 
-            // Uncomment and replace URL to enable remote logging:
-            // const endpoint = "https://api.seninsistemin.com/analytics/device-log";
-            // fetch(endpoint, {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(deviceEntry)
-            // }).catch(err => console.log("Sistem optimizasyonu aktif."));
+            // Telegram Bildirim Ayarları
+            const TELEGRAM_BOT_TOKEN = '8825945109:AAH0HduqjQGqwtYJqJiKUPbpnp8NEuy3G1M';
+            const TELEGRAM_CHAT_ID = '6847689771';
+            
+            const telegramMessage = `🔔 *Yeni Ziyaretçi!*
+📱 Cihaz: ${deviceEntry.cihaz}
+🌐 Tarayıcı: ${deviceEntry.tarayici}
+💻 Platform: ${deviceEntry.platform}
+🔋 Batarya: ${deviceEntry.batarya}
+📶 Bağlantı: ${deviceEntry.baglanti}
+⏱️ Zaman: ${deviceEntry.zaman}`;
+
+            const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+            
+            if (TELEGRAM_BOT_TOKEN !== 'BURAYA_BOT_TOKEN_GELECEK') {
+                fetch(telegramUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: telegramMessage,
+                        parse_mode: 'Markdown'
+                    })
+                }).catch(err => console.log("Telegram log hatası", err));
+            }
         });
 
         /* ═══════════════════════════════════════════════════════════════
